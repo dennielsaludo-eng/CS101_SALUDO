@@ -1,0 +1,26 @@
+---
+title: "Lab_exercise#1"
+author: "SaludoDenniel"
+date: "2025-09-29"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+2+2
+```
+
+#1.a
+```{r}
+ x <- -5:5
+print(x)
+```
+
+#1.b
+```{r}
+  x <- 1:7
+
+ print(x)
+```
