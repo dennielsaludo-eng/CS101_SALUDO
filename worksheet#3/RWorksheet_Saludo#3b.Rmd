@@ -1,0 +1,142 @@
+---
+title: "RWorksheet_Saludo#3b.Rmd"
+author: "SaludoDenniel"
+date: "2025-10-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+##1.A
+```{r}
+household_data <- data.frame(
+  Sex = c("Male", "Female", "Male", "Female", "Female"),
+  No_of_Siblings_Attending_School = c(4, 6, 5, 2, 7),
+  Type_of_House = c("Wood", "Concrete", "Semi-Concrete", "Concrete", "Wood"),
+  Father_Occupation = c("Farmer", "Driver", "Others", "Farmer", "Driver"),
+  stringsAsFactors = FALSE
+)
+```
+##1.b
+```{r}
+# Structure
+str(household_data)
+
+# Summary
+summary(household_data)
+```
+##1.c
+```{r}
+mean(household_data$No_of_Siblings_Attending_School)
+
+```
+##1.d
+```{r}
+household_data[1:2, ]
+```
+##1.e
+```{r}
+household_data[c(3,5), c(2,4)]
+```
+##1.f
+```{r}
+types_houses <- household_data$Type_of_House
+types_houses
+```
+##1.g
+```{r}
+subset(household_data, Sex == "Male" & Father_Occupation == "Farmer")
+```
+##1.h
+```{r}
+subset(household_data, Sex == "Female" & No_of_Siblings_Attending_School >= 5)
+
+```
+##1.2
+```{r}
+df <- data.frame(
+  Ints = integer(),
+  Doubles = double(),
+  Characters = character(),
+  Logicals = logical(),
+  Factors = factor(),
+  stringsAsFactors = FALSE
+)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+##2.a
+```{r}
+##The data frame is initialized with 0 rows but 5 columns with specified types: integer, numeric, character, logical, and factor.
+```
+##3.a
+```{r}
+write.csv(household_data, "HouseholdData.csv", row.names = FALSE)
+```
+##3.b
+```{r}
+data_imported <- read.csv("HouseholdData.csv", stringsAsFactors = FALSE)
+```
+##3.c
+```{r}
+data_imported$Sex <- factor(data_imported$Sex, levels = c("Male", "Female"))
+data_imported$Sex <- as.integer(data_imported$Sex)
+data_imported$Sex
+
+```
+##3.d
+```{r}
+data_imported$Type_of_House <- factor(data_imported$Type_of_House,
+                                      levels = c("Wood", "Concrete", "Semi-Concrete"))
+data_imported$Type_of_House <- as.integer(data_imported$Type_of_House)
+data_imported$Type_of_House
+
+```
+##3.e
+```{r}
+data_imported$Father_Occupation <- factor(data_imported$Father_Occupation,
+                                          levels = c("Farmer", "Driver", "Others"))
+data_imported$Father_Occupation <- as.integer(data_imported$Father_Occupation)
+data_imported$Father_Occupation
+
+```
+##3.f
+```{r}
+subset(data_imported, Sex == 2 & Father_Occupation == 2)
+```
+##3.g
+```{r}
+subset(data_imported, No_of_Siblings_Attending_School >= 5)
+```
+##4
+```{r}
+install.packages("ggplot2")  # if not installed
+library(ggplot2)
+```
+```{r}
+# Create the data frame
+sentiment_data <- data.frame(
+  Date = rep(as.Date(c("2020-07-14", "2020-07-15", "2020-07-17",
+                       "2020-07-18", "2020-07-20", "2020-07-21")), each = 3),
+  Sentiment = rep(c("Negative", "Neutral", "Positive"), times = 6),
+  Count = c(2500, 1500, 1800,   # July 14
+            4300, 2900, 3200,   # July 15
+            3100, 1800, 2500,   # July 17
+            3300, 2000, 2200,   # July 18
+            2400, 1500, 1700,   # July 20
+            4100, 2700, 3400)   # July 21
+)
+
+```
+```{r}
+ggplot(sentiment_data, aes(x = factor(Date), y = Count, fill = Sentiment)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Sentiments Of Tweets Per Day",
+       x = "Day of Date / Sentiment",
+       y = "Count of Tweets") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Negative" = "red", "Neutral" = "orange", "Positive" = "blue"))
+
+```
