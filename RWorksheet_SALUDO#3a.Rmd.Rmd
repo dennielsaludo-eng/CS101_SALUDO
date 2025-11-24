@@ -1,0 +1,100 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+ letters[seq(1, 11, by = 1)]
+```
+
+
+```{r}
+ letters[seq(1, 26, by=2)]
+```
+
+```{r}
+ letters[c(1,5,9,15,21)]
+```
+```{r}
+letters[seq(22, 26, by=1)]
+```
+```{r}
+letters[seq(15, 24, by=1)]
+```
+```{r}
+ city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+print(city)
+```
+```{r}
+ temp<- c(42, 39, 34, 34, 30, 27)
+print(temp)
+```
+```{r}
+ df_temp <- data.frame(city, temp)
+print(df_temp)
+```
+```{r}
+names(df_temp) <- c("City", "Temperature")
+print(df_temp)
+```
+```{r}
+str(df_temp)
+```
+```{r}
+ df_temp[3:4, ]
+```
+```{r}
+# City with Highest Temperature
+df_temp[which.max(df_temp$Temperature), ]
+
+# City with Lowest Temperature
+df_temp[which.min(df_temp$Temperature), ]
+```
+```{r}
+vector_data <- c(1:8, 11:14)
+mat_a <- matrix(vector_data, nrow = 3, ncol = 4)
+print(mat_a)
+```
+```{r}
+ mat_b <- mat_a * 2
+print(mat_b)
+```
+```{r}
+ mat_a[2, ]
+```
+```{r}
+ mat_a[1:2, 3:4]
+```
+```{r}
+mat_a[3, c(2, 3)]
+```
+```{r}
+mat_a[, 4]
+```
+```{r}
+dimnames(mat_b) <- list(
+    row_names = c("isa", "dalawa", "tatlo"),
+    col_names = c("uno", "dos", "tres", "quatro")
+)
+print(mat_b)
+```
+```{r}
+dim(mat_a) <- c(6, 2)
+print(mat_a)
+```
+```{r}
+dim(mat_a) <- c(6, 2)
+print(mat_a)
+```
+```{r}
+array_data <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+array_repeated <- rep(array_data, times = 2)
+arr_3d <- array(array_repeated, dim = c(2, 4, 3))
+print(arr_3d)
+```
+
+
+
+
+
+
