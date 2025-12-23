@@ -1,0 +1,241 @@
+---
+title: "R Worksheet SALUDO-4b"
+author: "Your Name"
+date: "2025-12-23"
+output: 
+  pdf_document:
+    latex_engine: pdflatex
+geometry: margin=1in
+---
+#1
+```{r}
+vectorA <- c(1, 2, 3, 4, 5)
+matrixA <- matrix(0, nrow = 5, ncol = 5)
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    matrixA[i, j] <- abs(vectorA[j] - i)
+  }
+}
+
+matrixA
+
+```
+
+#2
+```{r}
+for (i in 1:5) {
+  for (j in 1:i) {
+    print("*")
+  }
+}
+
+```
+
+#3
+```{r}
+start <- 1   # fixed input value
+
+a <- start
+b <- start
+
+repeat {
+  cat(a, " ")
+  c <- a + b
+  a <- b
+  b <- c
+  
+  if (!is.na(a) && a > 500) {
+    break
+  }
+}
+
+```
+
+#4
+#a
+
+```{r}
+shoe_data <- read.csv("shoe_sizes.csv")
+head(shoe_data)
+```
+
+#b
+```{r}
+male <- subset(shoe_data, Gender == "Male")
+female <- subset(shoe_data, Gender == "Female")
+
+nrow(male)
+nrow(female)
+```
+
+#c
+```{r}
+gender_count <- table(shoe_data$Gender)
+
+barplot(
+  gender_count,
+  col = c("blue", "pink"),
+  main = "Household Data by Gender",
+  xlab = "Gender",
+  ylab = "Count",
+  legend = TRUE
+)
+
+```
+
+#5
+```{r}
+expenses <- c(60, 10, 5, 25)
+labels <- c("Food", "Electricity", "Savings", "Miscellaneous")
+
+pie(
+  expenses,
+  labels = paste(labels, paste0(expenses, "%")),
+  col = rainbow(4),
+  main = "Monthly Expenses of Dela Cruz Family"
+)
+```
+
+
+#6
+#a
+```{r}
+data(iris)
+str(iris)
+```
+
+#b
+```{r}
+means <- c(
+  mean(iris$Sepal.Length),
+  mean(iris$Sepal.Width),
+  mean(iris$Petal.Length),
+  mean(iris$Petal.Width)
+)
+
+means
+```
+
+#c
+```{r}
+species_count <- table(iris$Species)
+
+pie(
+  species_count,
+  col = c("red", "green", "blue"),
+  main = "Species Distribution",
+  legend = names(species_count)
+)
+```
+
+#d
+```{r}
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+
+tail(setosa)
+tail(versicolor)
+tail(virginica)
+```
+
+#e
+```{r}
+iris$Species <- factor(iris$Species)
+
+plot(
+  iris$Sepal.Length,
+  iris$Sepal.Width,
+  col = as.numeric(iris$Species),
+  pch = as.numeric(iris$Species),
+  main = "Iris Dataset",
+  sub = "Sepal width and length",
+  xlab = "Sepal Length",
+  ylab = "Sepal Width"
+)
+
+legend(
+  "topright",
+  legend = levels(iris$Species),
+  col = 1:3,
+  pch = 1:3
+)
+
+```
+
+#7
+#a
+```{r}
+alexa <- read.csv("shoe_sizes.csv")
+head(alexa)
+
+male <- subset(alexa, Gender == "Male")
+female <- subset(alexa, Gender == "Female")
+
+cat("Number of males:", nrow(male), "\n")
+cat("Number of females:", nrow(female), "\n")
+
+```
+
+#b
+```{r}
+#7b – Create Variation column and count
+library(dplyr)
+
+# Create a Variation column based on Gender
+alexa$Variation <- ifelse(alexa$Gender == "Male", "Black", "White")
+
+# Count the variations
+variation_count <- alexa %>%
+  count(Variation)
+
+# Save and view
+save(variation_count, file = "variations.RData")
+variation_count
+
+```
+
+#c
+```{r}
+gender_count <- table(alexa$Gender)
+
+barplot(
+  gender_count,
+  col = c("blue", "pink"),
+  main = "Number of People by Gender",
+  xlab = "Gender",
+  ylab = "Count"
+)
+
+legend(
+  "topright",
+  legend = names(gender_count),
+  fill = c("blue", "pink")
+)
+
+```
+
+#d
+```{r}
+counts <- tapply(
+  variation_count$n,
+  variation_count$Variation,
+  sum
+)
+
+barplot(
+  counts,
+  col = c("black", "lightgray"),
+  main = "Black vs White Variations",
+  space = 0.2
+)
+
+legend(
+  "topright",
+  legend = names(counts),
+  fill = c("black", "lightgray")
+)
+
+
+```

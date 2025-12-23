@@ -1,0 +1,159 @@
+---
+title: "RWorksheet_saludo#4a"
+output:
+  pdf_document: default
+  html_document: default
+---
+#1
+#a
+```{r}
+Gender <- c("M","F","F","M","M","F","M","F")
+ShoeSize <- c(42,38,37,44,43,36,45,39)
+Height <- c(170,158,155,175,172,160,178,162)
+
+shoe_data <- data.frame(Gender, ShoeSize, Height)
+shoe_data
+```
+
+#b
+```{r}
+male_data <- subset(shoe_data, Gender == "M")
+female_data <- subset(shoe_data, Gender == "F")
+
+male_data
+female_data
+```
+
+
+#c
+```{r}
+mean(shoe_data$ShoeSize)
+mean(shoe_data$Height)
+```
+
+
+#2
+```{r}
+months_vector <- c("March","April","January","November","January",
+                   "September","October","September","November","August",
+                   "January","November","November","February","May","August",
+                   "July","December","August","August","September","November",
+                   "February","April")
+
+factor_months_vector <- factor(months_vector)
+factor_months_vector
+```
+
+
+#3
+```{r}
+summary(months_vector)
+summary(factor_months_vector)
+```
+
+#4
+```{r}
+factor_data <- c("East","West","West","West","West","North","North","North")
+
+new_order_data <- factor(factor_data, levels = c("East","West","North"))
+new_order_data
+
+```
+
+#5
+#a
+```{r}
+march_data <- read.csv("import_march.csv", header = TRUE)
+```
+
+#b
+```{r}
+head(march_data)
+print(march_data)
+
+```
+
+
+#6
+```{r}
+search_number <- function(x) {
+  if (x < 1 || x > 50) {
+    print("The number selected is beyond the range of 1 to 50")
+  } else if (x == 20) {
+    print(TRUE)
+  } else {
+    print(x)
+  }
+}
+
+search_number(sample(1:50, 1))
+```
+
+
+#7
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  count <- 0
+  
+  for (bill in bills) {
+    count <- count + price %/% bill
+    price <- price %% bill
+  }
+  count
+}
+
+min_bills(850)
+```
+
+
+#8
+#a
+```{r}
+students <- data.frame(
+  Name = c("Annie","Thea","Steve","Hanna"),
+  Grade1 = c(85,65,75,95),
+  Grade2 = c(65,75,55,75),
+  Grade3 = c(85,90,80,100),
+  Grade4 = c(100,90,85,90)
+)
+
+students
+```
+
+#b
+```{r}
+for (i in 1:nrow(students)) {
+  avg <- (students[i,2] + students[i,3] + students[i,4] + students[i,5]) / 4
+  if (avg > 90) {
+    cat(students$Name[i], "average grade this semester is", avg, "\n")
+  }
+}
+```
+
+#c
+```{r}
+for (j in 2:5) {
+  avg_test <- sum(students[,j]) / nrow(students)
+  if (avg_test < 80) {
+    cat("The", j-1, "the test was difficult\n")
+  }
+}
+```
+
+#d
+```{r}
+for (i in 1:nrow(students)) {
+  highest <- students[i,2]
+  for (j in 3:5) {
+    if (students[i,j] > highest) {
+      highest <- students[i,j]
+    }
+  }
+  if (highest > 90) {
+    cat(students$Name[i], "highest grade this semester is", highest, "\n")
+  }
+}
+```
+
+
